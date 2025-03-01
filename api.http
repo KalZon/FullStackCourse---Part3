@@ -1,0 +1,11 @@
+DELETE http://localhost:1234/api/persons/7
+
+###POST PERSON
+
+POST http://localhost:1234/api/persons
+Content-Type: application/json
+
+{
+    "name": "Ada Lovelace",
+    "number": "15-48-9555"
+}
