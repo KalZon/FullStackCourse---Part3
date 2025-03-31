@@ -1,6 +1,7 @@
 let persons = require('./persons.json')
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 
 const app = express()
 
@@ -12,6 +13,7 @@ const generatedId = () => {
 }
 
 app.use(express.json())
+app.use(cors())
 app.disable('x-powered-by')
 
 app.use((req, res, next) => {
@@ -30,23 +32,16 @@ app.get('/info', (req, res) => {
   )
 })
 
+app.get('/api/persons', (req, res) => {
+  res.json(persons)
+})
+
 app.get('/api/persons/:id', (req, res) => {
   const id = Number(req.params.id)
   const person = persons.find(person => person.id === id)
   if (person) {
     return res.json(person)
   } return res.status(404).send('<h1>404 not found</h1>')
-})
-
-app.delete('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id)
-  persons = persons.filter(person => person.id !== id)
-
-  res.status(204).end()
-})
-
-app.get('/api/persons', (req, res) => {
-  res.json(persons)
 })
 
 app.post('/api/persons', (req, res) => {
@@ -70,6 +65,13 @@ app.post('/api/persons', (req, res) => {
 
   persons = persons.concat(person)
   res.status(201).json(person)
+})
+
+app.delete('/api/persons/:id', (req, res) => {
+  const id = Number(req.params.id)
+  persons = persons.filter(person => person.id !== id)
+
+  res.status(204).end()
 })
 
 app.use((req, res) => {

@@ -1,7 +1,13 @@
-DELETE http://localhost:1234/api/persons/7
+### Hacer un GET de todas las personas
+GET http://localhost:1234/api/persons
 
-###POST PERSON
+### Hacer un GET de una persona por id
+GET http://localhost:1234/api/persons/2
 
+### Hacer un GET pero de la info
+GET http://localhost:1234/info
+
+### Hacer un post para una nueva persona
 POST http://localhost:1234/api/persons
 Content-Type: application/json
 
@@ -9,3 +15,6 @@ Content-Type: application/json
     "name": "Hi Zambrano",
     "number": "15-48-9555"
 }
+
+### Hacer un Delete de la persona por id
+DELETE http://localhost:1234/api/persons/7
